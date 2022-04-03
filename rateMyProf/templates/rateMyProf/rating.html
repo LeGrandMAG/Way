@@ -1,0 +1,28 @@
+{% extends 'main.html' %}
+{%load static %}
+
+
+
+{% block link %}
+    <link rel="stylesheet" href="{% static 'styles/rating.css'%}">
+{% endblock link %}
+{% block title %}
+<title> Rate My Prof</title>
+{% endblock %}
+
+
+{% block content %}
+
+<h1>This is for rating your professor</h1><hr>
+
+{% for i in user %}
+
+<div class="user_info">
+    <img  class='user_pro user_el'src="{{i.avatar.url}}" alt="">
+    <p>{{i.username}}</p>
+
+</div>
+<p>&#128512;</p>
+
+ {%endfor%}
+{%endblock%}

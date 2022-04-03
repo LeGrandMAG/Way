@@ -2,23 +2,49 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
+
+
+YEAR_CHOICES = [
+    ('All', 'All'),
+    ('Freshman', '1'),
+    ('Sophomore', '2'),
+    ('Junior', '3'),
+    ('Senior', '4')
+]
+
+
+CREDIT_CHOICES = [
+    ('1', '1'),
+    ('2', '2'),
+    ('3', '3'),
+    ('4', '4'),
+]
+
+DURATION_CHOICES = [
+    ('1', '1'),
+    ('2', '2'),
+    ('3', '3'),
+    ('4', '4')
+]
+#User model
 class User(AbstractUser):
     name = models.CharField(max_length=200, null=True)
     email = models.EmailField(unique=True, null=True)
     bio = models.TextField(null=True)
-
     avatar = models.ImageField(null=True, default="avatar.svg")
 
-    ##USERNAME_FIELD = 'email'
+    USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = []
 
+# Department model
 class Topic(models.Model):
     name = models.CharField(max_length=200)
+    department = models.BooleanField(default=True)
 
     def __str__(self):
         return self.name
 
-
+#Course Room available for the students
 class Room(models.Model):
     host = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     topic = models.ForeignKey(Topic, on_delete=models.SET_NULL, null=True)
@@ -35,7 +61,7 @@ class Room(models.Model):
     def __str__(self):
         return self.name
 
-
+#message in the course room
 class Message(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
@@ -49,33 +75,26 @@ class Message(models.Model):
     def __str__(self):
         return self.body[0:50]
 
-"""class Category(models.Model):
-    name = models.CharField(max_length=255)"""
 
 
-class Professor(models.Model):
-    name = models.CharField(max_length=200)
-    topic = models.ForeignKey(Topic, on_delete=models.CASCADE )
-
+#model for individual courses
 class Course(models.Model):
     current_students = models.ManyToManyField(User, blank=True, related_name='students', )
     name = models.CharField(max_length=255)
-    professor = models.ForeignKey(Professor, on_delete=models.CASCADE)
-    major = models.CharField(max_length=200)
-    year = models.IntegerField()
+    professor = models.ForeignKey('rateMyProf.Professor', on_delete=models.CASCADE)
+    year = models.CharField(choices=YEAR_CHOICES, max_length=100)
     courseid = models.CharField(max_length=200)
-    credit = models.IntegerField()
-    duration = models.IntegerField()
+    credit = models.CharField(max_length=100, choices=CREDIT_CHOICES)
+    duration = models.CharField(max_length=50, choices=DURATION_CHOICES)
     schedule = models.CharField(max_length=100)
     total_students = models.IntegerField()
-    topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
-    #rate = models.ForeignKey()
-    #rate_comments = models.ForeignKey()
-    note = models.TextField()
+    major = models.ForeignKey(Topic, on_delete=models.CASCADE)
+    tag = models.CharField(max_length=200, blank=True)
+    note = models.TextField(blank=True)
 
-"""class Rate(models.Model):
-    rate = models.
+    def __str__(self):
+        return f'{self.name}'
 
-"""
+
 
 

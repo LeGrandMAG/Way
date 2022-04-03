@@ -1,0 +1,25 @@
+
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap");
+
+.user_info{
+    background-color: var(--color-dark-light);
+    margin-bottom: 10px;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 5px ;
+    color: var(--color-main);
+}
+.user_pro{
+    width:30px;
+    border-radius: 100%;
+    height:auto;
+}
+
+.user_el{
+    margin-right: 10px;
+}
+

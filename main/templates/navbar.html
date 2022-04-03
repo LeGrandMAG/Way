@@ -16,9 +16,10 @@
                 <input name="q" placeholder="Search for posts" />
             </label>
         </form>
+        <a href="{%url 'rating' %}" id="rating_link" class="nav_link"> <p>RATING</p> </a>
         <nav class="header__menu">
 
-
+            
             <!-- Logged In -->
             {% if request.user.is_authenticated %}
             <div class="header__user">
@@ -38,7 +39,7 @@
             {% else %}
 
             <!-- Not Logged In -->
-            <a href="{% url 'login' %}">
+            <a href="{% url 'login' %}" class="nav_link">
                 <img src="{% static 'images/avatar.svg' %}" />
                 <p>Login</p>
             </a>
