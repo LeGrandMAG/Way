@@ -93,8 +93,7 @@ class Course(models.Model):
     note = models.TextField(blank=True)
 
     def __str__(self):
-        return f'{self.name}'
-
+        return self.name
 
 
 

@@ -8,12 +8,15 @@ from django.contrib.auth import authenticate, login
 import json
 from django.conf import settings
 from sentry_sdk import capture_exception
+from .models import Professor, Rating
 # Create your views here.
 
-def rating(request):
-    prof = "I am your professor"
-    user = User.objects.all()
-    return render(request, 'rateMyProf/rating.html', {'prof': prof, 'user':user})
+def DisplayRating(request):
+    rating = Rating.objects.all()
+
+    
+    context = { 'rating': rating}
+    return render(request, 'rateMyProf/rating.html', context)
 
 
 

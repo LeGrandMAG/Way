@@ -15,12 +15,15 @@
 
 <h1>This is for rating your professor</h1><hr>
 
-{% for i in user %}
+{% for i in rating %}
 
+<p>{{i.professor}}</p>
+    <p>{{i.score}} stars</p>
+    <p>{{i.comment}}</p>
+    <p>{{i.created|timesince}} ago</p>
 <div class="user_info">
     <img  class='user_pro user_el'src="{{i.avatar.url}}" alt="">
-    <p>{{i.username}}</p>
-
+    
 </div>
 <p>&#128512;</p>
 

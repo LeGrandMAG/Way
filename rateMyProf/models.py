@@ -30,7 +30,7 @@ class Rating(models.Model):
         ]
     )
     def __str__(self):
-        return self.course
+        return str(self.course)
 
 class finalRating(models.Model):
     professor = models.ForeignKey(Professor, on_delete=models.PROTECT, default= None, related_name= "finalRatingprof")
